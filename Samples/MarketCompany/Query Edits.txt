@@ -1,0 +1,45 @@
+All 7 tables now acessible in the Relationships and Data views.
+
+Query Edits:
+-----------------
+
+Customers Table:
+Validated and changed data types
+merged columns to create full_name
+parsed column to extract birth_year and formatted as text
+created conditional column has_children = Y if total_children >0 else N
+
+
+Products Table:
+Validated data types
+Validated the number of distinct brands and product names using Stats tools
+Created columns dicount_price and rounded to 2 decimal places.
+Grouped columns to find average product retail price by product
+Replaced null values with 0 in the recyclable and low_fat columns
+
+
+Stores Table:
+Validated data types
+Added  column full_address by merging store_city and store_state_ and store_country
+Added  column area_code by extracting characters before "-" in store_phone column
+
+
+Regions Table:
+validated data types
+
+
+
+Calender Table:
+Added columns Start Of Week, Name of Day, Start of Month, Name of Month, Quarter of Year, Year
+
+
+Returns Table
+Valiadted data types
+
+
+Transactions Folder
+Connected to Transactions folder in Power Query and combined files in folder directory 
+removed source file name column
+renamed to Transaction_Data
+Validated data types
+

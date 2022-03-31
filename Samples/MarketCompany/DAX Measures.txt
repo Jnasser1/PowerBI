@@ -1,0 +1,43 @@
+DAX Measures:
+-----------------
+
+
+Created the following measures in Transaction_Data table and Returns table:
+
+* Unique Products = DISTINCTCOUNT(Products[product_id])
+
+* Quantity Sold = SUM(Transaction_Data[quantity])
+* Total Transactions = COUNTX(Transaction_Data, Transaction_Data[transaction_date])
+* All Transactions = CALCULATE([Total Transactions], ALL(Transaction_Data))
+
+
+* Quantity Returned = SUM(Returns[quantity])
+* Total Returns = COUNTROWS(Returns)
+* All Returns = CALCULATE([Total Returns], ALL(Returns))
+*  Return Rate = [Quantity Returned]/[Quantity Sold]
+
+
+* Weekend Transactions = 
+COUNTX(FILTER(Transaction_Data, RELATED(Calender[Weekend])="Y"), Transaction_Data[Quantity]) 
+
+* %WeekendTransactions = [Weekend Transactions]/[Total Transactions]
+
+* Total Revenue = SUMX(Transaction_Data, Transaction_Data[Quantity Sold] * RELATED(Products[product_retail_price]))
+
+*Total Cost = SUMX(Transaction_Data, Transaction_Data[Quantity Sold] * RELATED(Products[product_cost]))
+
+* Total Profit = [Total Revenue] - [Total Cost]
+
+* YTD Revenue = CALCULATE([Total Revenue], DATESYTD('Calender'[date]))
+
+*60-Day Revenue = CALCULATE([Total Revenue], DATESINPERIOD(Calender[date], MAX(Calender[date]),-60,DAY))
+
+* Last Month Transactions = CALCULATE([Total Transactions], DATEADD(Calender[date],-1,MONTH))
+* Last Month Profit = CALCULATE([Total Profit], DATEADD(Calender[date],-1,MONTH))
+* Last Month Revenue = CALCULATE([Total Revenue], DATEADD(Calender[date],-1,MONTH))
+* Last Month Returns = CALCULATE([Total Returns], DATEADD(Calender[date], -1, MONTH))
+
+ Say we want a 10% lift on the previous month reveue, then the revenue target for next month is:
+* Revenue Target = [Last Month Revenue] * 1.10
+
+*

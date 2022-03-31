@@ -1,0 +1,34 @@
+DAX Columns:
+
+Calculated Columns:
+-----------------------
+
+Calender Table:
+* Added Weekend (Y for Sunday or Saturday, N else)  to Calender Table
+Weekend = IF('Calendar'[Day Name] = "Saturday" || 'Calendar'[Day Name] = "Sunday", "Y", "N")
+
+
+* Added End Of Month column to Calender Table using ENDOFMONTH()
+
+Customers Table:
+* Added Current Age using formula
+Current Age = FLOOR(IF('Customers'[birthdate] < TODAY(), DATEDIFF(Customers[birthdate], TODAY(), DAY) / 365.25, 0), 1)
+
+
+* Added Priority  ("High" , "Standard") for customers who own homes and memebrship card.
+Priority = IF(Customers[member_card]="Golden" && Customers[homeowner] = "Y", "High", "Standard")
+
+* Added Short_Country 
+Short Country = UPPER(LEFT([customer_country],3))
+
+* Added House Number
+House_Number = LEFT(Customers[customer_address], SEARCH ( " ", 'Customers'[customer_address], 1, BLANK () ))
+
+Products Table:
+* Added price_tier column
+price_tier = IF(Products[product_retail_price] >3, "High", IF(Products[product_retail_price] >1, "Mid", "Low"))
+
+
+Stores Table:
+* Added Years_Since_Remodel 
+Years_Since_Remodel = DATEDIFF(Stores[last_remodel_date], TODAY(), YEAR)

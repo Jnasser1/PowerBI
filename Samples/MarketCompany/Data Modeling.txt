@@ -1,0 +1,27 @@
+-Relationship Modeling:
+---------------------------
+
+* Connected Transaction_Data to Customers, Products, and Stores using customer_id, product_id and store_id PK/FK 
+* Connected Transaction_Data to Calender by Calender.date <-* Transaction_Data.transaction_date, likewise for Calender.date <-*Transaction_Data.stock_date 
+* Connected Returns to Products, Calender, and Stores using product_id, store_id and date as PK/FK 
+* Connected Stores to Regions with snowflake schema.
+
+
+-Validation:
+----------------
+
+* All relationships are one-to-many with PK on the lookup side and FK on the data side
+* Filters are all one-way.
+* Filter contet flows downstream from lookup tables to data tables
+* Data tables are connected by shared lookup tables
+
+
+Organization:
+-----------------
+
+* Made all foreign keys in data tables hidden from Report View, and region_id from Stores table hidden
+
+* Changed to short-date format across all tables.
+* Changed Product product_retail_price to currency format
+* Categorized Customer location fields appropriately as city, postal code, and country.
+* Categorized Stores city, country, full_address as City, Country, Address.
